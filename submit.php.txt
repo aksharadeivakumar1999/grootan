@@ -1,0 +1,33 @@
+<?php
+    $name = $_POST['name'];
+    $age = $_POST['age'];
+    $country = $_POST['country'];
+    $dob = $_POST['dob'];
+    $gender = $_POST['gender'];
+    $lk = $_POST['languages_known'];
+    $favcolor = $_POST['favcolor'];
+    $img = $_POST['img'];
+    $mail = $_POST['mail'];
+    $timing = $_POST['timing'];
+    $website = $_POST['website'];
+    $cgpa = $_POST['cgpa'];
+    $host = "localhost";
+    $dbUsername = "root";
+    $dbPassword = "Madhu";
+    $dbname = "test";
+    //create connection
+    $conn = new mysqli($host, $dbUsername, $dbPassword, $dbname);
+    if (mysqli_connect_error()) {
+     die('Connect Error('. mysqli_connect_errno().')'. mysqli_connect_error());
+     
+    } else {
+ 
+     $INSERT = "INSERT INTO test_grootan (name, age, country, dob, gender, languages_known, favcolor, img, mail, timing, website, cgpa) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+     
+      $stmt = $conn->prepare($INSERT);
+      $stmt->bind_param('sissssssssss' , $name, $age, $country, $dob, $gender, $lk, $favcolor, $img, $mail, $timing, $website, $cgpa);
+      $stmt->execute();
+     $stmt->close();
+     $conn->close();
+    }
+    ?>
